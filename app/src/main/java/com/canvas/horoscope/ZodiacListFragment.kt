@@ -28,7 +28,7 @@ class ZodiacListFragment:Fragment() {
         zodiacRecyclerView = view.findViewById(R.id.zodiac_recycler_view) as RecyclerView
         zodiacRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        val dividerItemDecoration = DividerItemDecoration(
+        val dividerItemDecoration = DividerItemDecoration( //add div between items in recyclerview
             zodiacRecyclerView.context, (zodiacRecyclerView.layoutManager as LinearLayoutManager).orientation)
 
         zodiacRecyclerView.addItemDecoration(dividerItemDecoration)
