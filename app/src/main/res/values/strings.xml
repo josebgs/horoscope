@@ -12,4 +12,5 @@
     <string name="scorpio">Scorpio</string>
     <string name="sagittarius">Sagittarius</string>
     <string name="capricorn">Capricorn</string>
+    <string name="zodiac_name">Zodiac Name</string>
 </resources>
