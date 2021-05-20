@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -26,9 +27,14 @@ class ZodiacListFragment:Fragment() {
         val view = inflater.inflate(R.layout.fragment_zodiac_list, container, false)
         zodiacRecyclerView = view.findViewById(R.id.zodiac_recycler_view) as RecyclerView
         zodiacRecyclerView.layoutManager = LinearLayoutManager(context)
+
+        val dividerItemDecoration = DividerItemDecoration(
+            zodiacRecyclerView.context, (zodiacRecyclerView.layoutManager as LinearLayoutManager).orientation)
+
+        zodiacRecyclerView.addItemDecoration(dividerItemDecoration)
+
+
         updateUI()
-
-
         return view
     }
 

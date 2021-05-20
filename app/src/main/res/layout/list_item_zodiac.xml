@@ -8,8 +8,10 @@
         android:id="@+id/zodiac_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="cursive"
         android:textAlignment="center"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
+        android:textColor="@color/black"
+        android:textSize="34sp" />
 </LinearLayout>
