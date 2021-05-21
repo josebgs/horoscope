@@ -17,7 +17,7 @@ class ZodiacListFragment:Fragment() {
         ViewModelProvider(this@ZodiacListFragment).get(ZodiacListViewModel::class.java)
     }
     private lateinit var zodiacRecyclerView: RecyclerView
-    private lateinit var adapter: ZodiacAdapter
+    private var adapter: ZodiacAdapter? = ZodiacAdapter(emptyList())
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +27,7 @@ class ZodiacListFragment:Fragment() {
         val view = inflater.inflate(R.layout.fragment_zodiac_list, container, false)
         zodiacRecyclerView = view.findViewById(R.id.zodiac_recycler_view) as RecyclerView
         zodiacRecyclerView.layoutManager = LinearLayoutManager(context)
+        zodiacRecyclerView.adapter = adapter
 
         val dividerItemDecoration = DividerItemDecoration( //add div between items in recyclerview
             zodiacRecyclerView.context, (zodiacRecyclerView.layoutManager as LinearLayoutManager).orientation)
@@ -34,12 +35,21 @@ class ZodiacListFragment:Fragment() {
         zodiacRecyclerView.addItemDecoration(dividerItemDecoration)
 
 
-        updateUI()
         return view
     }
 
-    private fun updateUI() {
-        val signs = zodiacListViewModel.signs
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        zodiacListViewModel.zodiacListLiveData.observe(
+            viewLifecycleOwner,
+            { signs ->
+                signs?.let{
+                    updateUI(signs)
+                }
+            })
+
+    }
+    private fun updateUI(signs: List<Zodiac>) {
         adapter = ZodiacAdapter(signs)
         zodiacRecyclerView.adapter = adapter
     }
@@ -52,26 +62,26 @@ class ZodiacListFragment:Fragment() {
 
     private inner class ZodiacHolder(view: View): RecyclerView.ViewHolder(view){
         private val zodiacNameTextView: TextView = view.findViewById(R.id.zodiac_name)
-        private lateinit var sign : Zodiac
+        private lateinit var zodiac : Zodiac
 
-        fun bind(sign: Zodiac){
-            this.sign = sign
-            zodiacNameTextView.text = getString(this.sign.signId)
+        fun bind(zodiac: Zodiac){
+            this.zodiac = zodiac
+            zodiacNameTextView.text = this.zodiac.sign
         }
     }
 
-    private inner class ZodiacAdapter(var signs: List<Zodiac>): RecyclerView.Adapter<ZodiacHolder>(){
+    private inner class ZodiacAdapter(var zodiacs: List<Zodiac>): RecyclerView.Adapter<ZodiacHolder>(){
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ZodiacHolder {
             val view = layoutInflater.inflate(R.layout.list_item_zodiac, parent, false)
             return ZodiacHolder(view)
         }
 
         override fun onBindViewHolder(holder: ZodiacHolder, position: Int) {
-            val sign = signs[position]
+            val sign = zodiacs[position]
             holder.bind(sign)
         }
 
-        override fun getItemCount() = signs.size
+        override fun getItemCount() = zodiacs.size
 
     }
 }

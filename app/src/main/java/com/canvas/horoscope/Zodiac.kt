@@ -1,5 +1,7 @@
 package com.canvas.horoscope
 
-import androidx.annotation.StringRes
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-data class Zodiac(@StringRes val signId: Int)
+@Entity
+data class Zodiac(@PrimaryKey val sign: String)
