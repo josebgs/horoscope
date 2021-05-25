@@ -1,0 +1,34 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "29f491f8527119df0fa60b8456ba292d",
+    "entities": [
+      {
+        "tableName": "Zodiac",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sign` TEXT NOT NULL, PRIMARY KEY(`sign`))",
+        "fields": [
+          {
+            "fieldPath": "sign",
+            "columnName": "sign",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "sign"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '29f491f8527119df0fa60b8456ba292d')"
+    ]
+  }
+}

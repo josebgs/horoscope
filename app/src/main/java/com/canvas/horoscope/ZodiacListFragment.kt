@@ -66,22 +66,22 @@ class ZodiacListFragment:Fragment() {
 
         fun bind(zodiac: Zodiac){
             this.zodiac = zodiac
-            zodiacNameTextView.text = this.zodiac.sign
+            zodiacNameTextView.text = zodiac.sign
         }
     }
 
-    private inner class ZodiacAdapter(var zodiacs: List<Zodiac>): RecyclerView.Adapter<ZodiacHolder>(){
+    private inner class ZodiacAdapter(var signs: List<Zodiac>): RecyclerView.Adapter<ZodiacHolder>(){
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ZodiacHolder {
             val view = layoutInflater.inflate(R.layout.list_item_zodiac, parent, false)
             return ZodiacHolder(view)
         }
 
         override fun onBindViewHolder(holder: ZodiacHolder, position: Int) {
-            val sign = zodiacs[position]
+            val sign = signs[position]
             holder.bind(sign)
         }
 
-        override fun getItemCount() = zodiacs.size
+        override fun getItemCount() = signs.size
 
     }
 }
