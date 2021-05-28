@@ -66,7 +66,7 @@ class ZodiacListFragment:Fragment() {
 
         fun bind(zodiac: Zodiac){
             this.zodiac = zodiac
-            zodiacNameTextView.text = zodiac.sign
+            zodiacNameTextView.text = zodiac.name
         }
     }
 

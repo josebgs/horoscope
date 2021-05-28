@@ -6,7 +6,7 @@ import androidx.room.Room
 import database.ZodiacDatabase
 import java.lang.IllegalStateException
 
-private const val DATABASE_NAME = "zodiac-database.sqlite"
+private const val DATABASE_NAME = "zodiac_db"
 class ZodiacRepository private constructor(context: Context){
 
     private val database: ZodiacDatabase = Room.databaseBuilder(
