@@ -1,16 +1,19 @@
 package com.canvas.horoscope
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
+private const val TAG = "ZodiacListFragment"
 class ZodiacListFragment:Fragment() {
 
     private val zodiacListViewModel: ZodiacListViewModel by lazy{
@@ -60,13 +63,23 @@ class ZodiacListFragment:Fragment() {
         }
     }
 
-    private inner class ZodiacHolder(view: View): RecyclerView.ViewHolder(view){
+    private inner class ZodiacHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener{
         private val zodiacNameTextView: TextView = view.findViewById(R.id.zodiac_name)
         private lateinit var zodiac : Zodiac
+
+        init{
+            itemView.setOnClickListener(this)
+        }
 
         fun bind(zodiac: Zodiac){
             this.zodiac = zodiac
             zodiacNameTextView.text = zodiac.name
+        }
+
+        override fun onClick(v: View) {
+            Log.d(TAG, "${this.zodiac.name} was clicked")
+            val direction = ZodiacListFragmentDirections.actionZodiacListFragmentToZodiacFragment(id = zodiac.id.toString())
+            v.findNavController().navigate(direction)
         }
     }
 

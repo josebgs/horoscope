@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/zodiacListFragment">
+
+    <fragment
+        android:id="@+id/zodiacListFragment"
+        android:name="com.canvas.horoscope.ZodiacListFragment"
+        android:label="ZodiacListFragment" >
+        <action
+            android:id="@+id/action_zodiacListFragment_to_zodiacFragment"
+            app:destination="@id/zodiacFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/zodiacFragment"
+        android:name="com.canvas.horoscope.ZodiacFragment"
+        android:label="fragment_zodiac"
+        tools:layout="@layout/fragment_zodiac" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
+</navigation>

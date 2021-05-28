@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Room
 import database.ZodiacDatabase
 import java.lang.IllegalStateException
+import java.util.*
 
 private const val DATABASE_NAME = "zodiac_db"
 class ZodiacRepository private constructor(context: Context){
@@ -19,6 +20,7 @@ class ZodiacRepository private constructor(context: Context){
     private val zodiacDao = database.zodiacDao()
 
     fun getSigns(): LiveData<List<Zodiac>> = zodiacDao.getSigns()
+    fun getSign(id:Int): LiveData<Zodiac?> = zodiacDao.getSign(id)
 
     companion object{
         private var INSTANCE: ZodiacRepository? = null
