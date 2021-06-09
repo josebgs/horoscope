@@ -11,4 +11,7 @@
     <string name="default_symbol">Default Symbol</string>
     <string name="default_description">Default Description</string>
     <string name="default_name">Default Name</string>
+    <string name="daily_horoscope">Daily Horoscope</string>
+    <string name="textview">TextView</string>
+    <string name="default_horoscope">Default Horoscope</string>
 </resources>

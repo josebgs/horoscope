@@ -8,7 +8,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import api.AstrologerApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ZodiacFragment : Fragment() {
 
@@ -16,6 +21,7 @@ class ZodiacFragment : Fragment() {
     private lateinit var descriptionTextView: TextView
     private lateinit var symbolTextView: TextView
     private lateinit var monthTextView: TextView
+    private lateinit var horoscopeTextView: TextView
     private lateinit var zodiac: Zodiac
     private val zodiacDetailViewModel: ZodiacDetailViewModel by lazy{
         ViewModelProvider(this).get(ZodiacDetailViewModel::class.java)
@@ -41,6 +47,7 @@ class ZodiacFragment : Fragment() {
         descriptionTextView = view.findViewById(R.id.zodiac_description)
         symbolTextView = view.findViewById(R.id.zodiac_symbol)
         monthTextView = view.findViewById(R.id.zodiac_month)
+        horoscopeTextView = view.findViewById(R.id.zodiac_horoscope)
 
         return view
     }
@@ -54,6 +61,15 @@ class ZodiacFragment : Fragment() {
                 sign?.let {
                     this.zodiac = sign
                     updateUI()
+                }
+            }
+        )
+
+        zodiacDetailViewModel.horoscopeLiveData.observe(
+            viewLifecycleOwner,
+            { horoscopeResponse ->
+                horoscopeResponse?.let {
+                    horoscopeTextView.text = horoscopeResponse.horoscope
                 }
             }
         )
