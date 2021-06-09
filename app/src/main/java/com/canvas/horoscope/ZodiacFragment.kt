@@ -23,7 +23,7 @@ class ZodiacFragment : Fragment() {
     private lateinit var monthTextView: TextView
     private lateinit var horoscopeTextView: TextView
     private lateinit var zodiac: Zodiac
-    private val zodiacDetailViewModel: ZodiacDetailViewModel by lazy{
+    private val zodiacDetailViewModel: ZodiacDetailViewModel by lazy {
         ViewModelProvider(this).get(ZodiacDetailViewModel::class.java)
     }
 
@@ -68,16 +68,11 @@ class ZodiacFragment : Fragment() {
 
     private fun updateUI() {
         viewLifecycleOwner.lifecycleScope.launch {
-            withContext(Dispatchers.IO){
-                val horoscope = zodiacDetailViewModel.backend.fetchHoroscope(zodiac.name.lowercase()).horoscope
-                withContext(Dispatchers.Main) {
-                    nameTextView.text = zodiac.name
-                    descriptionTextView.text = zodiac.description
-                    symbolTextView.text = zodiac.symbol
-                    monthTextView.text = zodiac.month
-                    horoscopeTextView.text = horoscope
-                }
-            }
+            horoscopeTextView.text = zodiacDetailViewModel.getHoroscope(zodiac.name.lowercase()).horoscope
+            nameTextView.text = zodiac.name
+            descriptionTextView.text = zodiac.description
+            symbolTextView.text = zodiac.symbol
+            monthTextView.text = zodiac.month
         }
     }
 }

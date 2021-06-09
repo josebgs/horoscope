@@ -2,9 +2,12 @@ package com.canvas.horoscope
 
 import androidx.lifecycle.*
 import api.AstrologerApi
+import api.HoroscopeResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ZodiacDetailViewModel: ViewModel() {
-    val backend: AstrologerApi = AstrologerApi.getApiService()
     private val zodiacRepository = ZodiacRepository.get()
     private val zodiacIdLiveData = MutableLiveData<Int>()
 
@@ -17,4 +20,10 @@ class ZodiacDetailViewModel: ViewModel() {
         zodiacIdLiveData.value = zodiacId
     }
 
+    suspend fun getHoroscope(sign: String): HoroscopeResponse{
+        return withContext(Dispatchers.IO){
+            zodiacRepository.getHoroscope(sign)
+        }
+
+    }
 }
