@@ -13,12 +13,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         android:gravity="center"
         android:text="@string/description"
         android:textColor="@color/black"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/text_symbol"
+        app:layout_constraintBottom_toTopOf="@+id/zodiac_symbol"
         app:layout_constraintEnd_toStartOf="@id/zodiac_description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_name" />
@@ -28,7 +28,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="128dp"
         android:layout_marginBottom="32dp"
         android:gravity="center"
         android:text="@string/name"
@@ -37,7 +36,7 @@
         app:layout_constraintBottom_toTopOf="@+id/zodiac_description"
         app:layout_constraintEnd_toStartOf="@id/zodiac_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/zodiac_name" />
 
     <TextView
         android:id="@+id/text_symbol"
@@ -61,12 +60,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         android:gravity="center"
         android:text="@string/month"
         android:textColor="@color/black"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/text_horoscope"
+        app:layout_constraintBottom_toTopOf="@+id/zodiac_horoscope"
         app:layout_constraintEnd_toStartOf="@+id/zodiac_month"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_symbol" />
@@ -76,7 +75,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:gravity="center"
