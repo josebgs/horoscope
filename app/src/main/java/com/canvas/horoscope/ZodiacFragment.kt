@@ -57,28 +57,27 @@ class ZodiacFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         zodiacDetailViewModel.crimeLiveData.observe(
             viewLifecycleOwner,
-            Observer{ sign ->
+            { sign ->
                 sign?.let {
                     this.zodiac = sign
                     updateUI()
                 }
             }
         )
-
-        zodiacDetailViewModel.horoscopeLiveData.observe(
-            viewLifecycleOwner,
-            { horoscopeResponse ->
-                horoscopeResponse?.let {
-                    horoscopeTextView.text = horoscopeResponse.horoscope
-                }
-            }
-        )
     }
 
     private fun updateUI() {
-        nameTextView.text = zodiac.name
-        descriptionTextView.text = zodiac.description
-        symbolTextView.text = zodiac.symbol
-        monthTextView.text = zodiac.month
+        viewLifecycleOwner.lifecycleScope.launch {
+            withContext(Dispatchers.IO){
+                val horoscope = zodiacDetailViewModel.backend.fetchHoroscope(zodiac.name.lowercase()).horoscope
+                withContext(Dispatchers.Main) {
+                    nameTextView.text = zodiac.name
+                    descriptionTextView.text = zodiac.description
+                    symbolTextView.text = zodiac.symbol
+                    monthTextView.text = zodiac.month
+                    horoscopeTextView.text = horoscope
+                }
+            }
+        }
     }
 }
